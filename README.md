@@ -1,22 +1,33 @@
-run.pay — Agent Marketplace
+# run.pay — Agent Marketplace
 
-Stripe-native marketplace where AI agents autonomously discover and purchase API services. Pay-per-call, no accounts needed.
+> Stripe-native marketplace where AI agents autonomously discover and purchase API services. Pay-per-call, no accounts needed.
 
-MCP Endpoint
+## MCP Endpoint
+
+```
 https://runpay-backend-visibility-production.up.railway.app/mcp
-Connect your agent
-Claude Desktop
-Add to ~/Library/Application Support/Claude/claude_desktop_config.json:
-json{
+```
+
+## Connect your agent
+
+### Claude Desktop
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+```json
+{
   "mcpServers": {
     "runpay": {
       "url": "https://runpay-backend-visibility-production.up.railway.app/mcp"
     }
   }
 }
-Cursor
-Add to .cursor/mcp.json:
-json{
+```
+
+### Cursor
+Add to `.cursor/mcp.json`:
+
+```json
+{
   "mcpServers": {
     "runpay": {
       "url": "https://runpay-backend-visibility-production.up.railway.app/mcp",
@@ -24,13 +35,34 @@ json{
     }
   }
 }
-Available tools
-ToolDescriptionlist_servicesBrowse all available services and pricescall_serviceCall a service and pay automatically via Stripe
-Available services
-ServicePriceDescriptionPhone Validator$0.60/callValidate phone numbers worldwide. Returns country, line type, E164 formatPhone Validator Batch$5.00/batchValidate up to 1000 numbers in one callWeb Scraper Pro$0.60/callExtract title, content, links, emails from any URLWeb Scraper Batch$3.00/batchScrape up to 10 URLs in parallelPDF Generator$0.60/callGenerate professional PDFs (invoices, reports, contracts)Screenshot API$0.60/callCapture any website as PNG with site accessibility check
-Python SDK
-pythonpip install requests
-pythonfrom runpay_sdk import RunPay
+```
+
+## Available tools
+
+| Tool | Description |
+|---|---|
+| `list_services` | Browse all available services and prices |
+| `call_service` | Call a service and pay automatically via Stripe |
+
+## Available services
+
+| Service | Price | Description |
+|---|---|---|
+| Phone Validator | $0.60/call | Validate phone numbers worldwide. Returns country, line type, E164 format |
+| Phone Validator Batch | $5.00/batch | Validate up to 1000 numbers in one call |
+| Web Scraper Pro | $0.60/call | Extract title, content, links, emails from any URL |
+| Web Scraper Batch | $3.00/batch | Scrape up to 10 URLs in parallel |
+| PDF Generator | $0.60/call | Generate professional PDFs (invoices, reports, contracts) |
+| Screenshot API | $0.60/call | Capture any website as PNG with site accessibility check |
+
+## Python SDK
+
+```python
+pip install requests
+```
+
+```python
+from runpay_sdk import RunPay
 
 # Initialize (sandbox=True for testing without payment)
 rp = RunPay(agent_id="my-agent-001", sandbox=False)
@@ -74,27 +106,51 @@ with open("invoice.html", "w") as f:
 result = rp.screenshot("https://example.com")
 print(result['screenshot_url'])
 print(result['usage']['embed'])  # <img> tag ready to use
-Download SDK: runpay_sdk.py
-How it works
+```
 
-Sellers publish any API function and set a price per call
-AI agents discover services via MCP protocol automatically
-Stripe charges the agent per call automatically
-Sellers receive payouts directly via Stripe Connect
+Download SDK: [runpay_sdk.py](./runpay_sdk.py)
 
-Sandbox mode (test without payment)
-python# No real payment — perfect for development
+## How it works
+
+1. **Sellers** publish any API function and set a price per call
+2. **AI agents** discover services via MCP protocol automatically
+3. **Stripe** charges the agent per call automatically
+4. **Sellers** receive payouts directly via Stripe Connect
+
+## Sandbox mode (test without payment)
+
+```python
+# No real payment — perfect for development
 rp = RunPay(agent_id="my-agent-001", sandbox=True)
 result = rp.validate_phone("+33612345678")
+```
+
 Or via API directly:
-bashcurl -X POST https://runpay-backend-visibility-production.up.railway.app/api/sandbox/call/SERVICE_ID \
+```bash
+curl -X POST https://runpay-backend-visibility-production.up.railway.app/api/sandbox/call/SERVICE_ID \
   -H "Content-Type: application/json" \
   -d '{"agent_id":"my-agent","payload":{"phone":"+33612345678"}}'
-Setup your agent wallet
+```
+
+## Setup your agent wallet
+
 Before calling paid services, your agent needs a payment card attached.
-👉 Setup Agent Wallet
-Sell your API
+
+👉 **[Setup Agent Wallet](https://getrunpay.com/agent-setup.html)**
+
+## Sell your API
+
 Publish any function and earn per agent call via Stripe.
-👉 Become a seller
-Links
-🌐 Sitegetrunpay.com📖 Docsgetrunpay.com/docs.html📝 Sell your APIgetrunpay.com/signup.html🤖 Agent Setupgetrunpay.com/agent-setup.html📊 Dashboardplayful-arithmetic-66a284.netlify.app🔍 Smitherysmithery.ai/servers/runpay/marketplace
+
+👉 **[Become a seller](https://getrunpay.com/signup.html)**
+
+## Links
+
+| | |
+|---|---|
+| 🌐 **Site** | [getrunpay.com](https://getrunpay.com) |
+| 📖 **Docs** | [getrunpay.com/docs.html](https://getrunpay.com/docs.html) |
+| 📝 **Sell your API** | [getrunpay.com/signup.html](https://getrunpay.com/signup.html) |
+| 🤖 **Agent Setup** | [getrunpay.com/agent-setup.html](https://getrunpay.com/agent-setup.html) |
+| 📊 **Dashboard** | [playful-arithmetic-66a284.netlify.app](https://playful-arithmetic-66a284.netlify.app) |
+| 🔍 **Smithery** | [smithery.ai/servers/runpay/marketplace](https://smithery.ai/servers/runpay/marketplace) |
