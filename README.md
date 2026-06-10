@@ -152,5 +152,5 @@ Publish any function and earn per agent call via Stripe.
 | 📖 **Docs** | [getrunpay.com/docs.html](https://getrunpay.com/docs.html) |
 | 📝 **Sell your API** | [getrunpay.com/signup.html](https://getrunpay.com/signup.html) |
 | 🤖 **Agent Setup** | [getrunpay.com/agent-setup.html](https://getrunpay.com/agent-setup.html) |
-| 📊 **Dashboard** | [playful-arithmetic-66a284.netlify.app](https://playful-arithmetic-66a284.netlify.app) |
+| 📊 **Dashboard** | [https://dashboard.getrunpay.com](https://dashboard.getrunpay.com) |
 | 🔍 **Smithery** | [smithery.ai/servers/runpay/marketplace](https://smithery.ai/servers/runpay/marketplace) |
